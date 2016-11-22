@@ -76,10 +76,10 @@ demo = {
             chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
         }
 
-        var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-        md.startAnimationForLineChart(dailySalesChart);
-
+        // var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+        //
+        // md.startAnimationForLineChart(dailySalesChart);
+        //
 
 
         /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
