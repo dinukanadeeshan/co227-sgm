@@ -13,6 +13,12 @@
 
     <div class="sidebar-wrapper">
         <ul class="nav">
+            <li class="">
+                <a href="typography.html">
+                    <i class="material-icons">library_books</i>
+                    <p>Overall Class</p>
+                </a>
+            </li>
             <li class="<?php if ($active === 'dashboard') echo 'active' ?>">
                 <a href="<?php echo site_url('dashboard'); ?>">
                     <i class="material-icons">dashboard</i>
@@ -31,6 +37,7 @@
                     <p>Table List</p>
                 </a>
             </li>
+
 
         </ul>
     </div>

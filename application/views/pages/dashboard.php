@@ -76,13 +76,12 @@
 
 
                             <h4 class="card-title">Alec Thompson</h4>
-                            <h6 class="category text-gray">--- Grade 10 ---</h6>
-                            <p class="card-content">
-                                Don't be scared of the truth because we need to restart the human foundation in
-                                truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the
-                                back is...
+                            <h6 class="category text-gray">--- 13827 ---</h6>
+                            <p class="">
+                                <label>Grade 10</label>
                             </p>
-                            <a href="#pablo" class="btn btn-primary btn-round">More Details</a>
+
+                            <a href="#pablo" class="btn btn-sm btn-primary btn-round">More Details</a>
                         </div>
                     </div>
                 </div>
@@ -200,8 +199,8 @@
                             <div id="classavgchart"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="title">Completed Tasks</h4>
-                            <p class="category">Last Campaign Performance</p>
+                            <!--                            <h4 class="title">Completed Tasks</h4>-->
+                            <!--                            <p class="category">Last Campaign Performance</p>-->
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -216,8 +215,8 @@
                             <div class="ct-chart" id="completedTasksChart"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="title">Completed Tasks</h4>
-                            <p class="category">Last Campaign Performance</p>
+                            <!--                            <h4 class="title">Completed Tasks</h4>-->
+                            <!--                            <p class="category">Last Campaign Performance</p>-->
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -233,8 +232,8 @@
                         <div id="marksChart"></div>
                     </div>
                     <div class="card-content">
-                        <h4 class="title">Completed Tasks</h4>
-                        <p class="category">Last Campaign Performance</p>
+                        <!--                        <h4 class="title">Completed Tasks</h4>-->
+                        <!--                        <p class="category">Last Campaign Performance</p>-->
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -245,34 +244,34 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6 col-md-12">
+                <div class="col-md-12">
                     <div class="card card-nav-tabs">
                         <div class="card-header" data-background-color="purple">
                             <div class="nav-tabs-navigation">
                                 <div class="nav-tabs-wrapper">
-                                    <span class="nav-tabs-title">Tasks:</span>
+                                    <span class="nav-tabs-title">More</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
-                                        <li class="active">
-                                            <a href="#profile" data-toggle="tab">
-                                                <i class="material-icons">bug_report</i>
-                                                Bugs
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
+                                        <!--                                        <li class="active">-->
+                                        <!--                                            <a href="#profile" data-toggle="tab">-->
+                                        <!--                                                <i class="material-icons">bug_report</i>-->
+                                        <!--                                                Bugs-->
+                                        <!--                                                <div class="ripple-container"></div>-->
+                                        <!--                                            </a>-->
+                                        <!--                                        </li>-->
                                         <li class="">
                                             <a href="#messages" data-toggle="tab">
                                                 <i class="material-icons">code</i>
-                                                Website
+                                                Compare with
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
-                                        <li class="">
-                                            <a href="#settings" data-toggle="tab">
-                                                <i class="material-icons">cloud</i>
-                                                Server
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
+                                        <!--                                        <li class="">-->
+                                        <!--                                            <a href="#settings" data-toggle="tab">-->
+                                        <!--                                                <i class="material-icons">cloud</i>-->
+                                        <!--                                                Server-->
+                                        <!--                                                <div class="ripple-container"></div>-->
+                                        <!--                                            </a>-->
+                                        <!--                                        </li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -280,16 +279,18 @@
 
                         <div class="card-content">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="profile">
+                                <div class="tab-pane" id="profile">
                                     <table class="table">
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="optionsCheckboxes" checked>
-                                                    </label>
-                                                </div>
+                                                <!--                                                <div class="checkbox">-->
+                                                <!--                                                    <label>-->
+                                                <!--                                                        <input type="checkbox" name="optionsCheckboxes" checked>-->
+                                                <!--                                                    </label>-->
+                                                <!--                                                </div>-->
+
+
                                             </td>
                                             <td>Sign contract for "What are conference organizers afraid of?"</td>
                                             <td class="td-actions text-right">
@@ -368,7 +369,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane" id="messages">
+                                <div class="tab-pane active" id="messages">
                                     <table class="table">
                                         <tbody>
                                         <tr>
@@ -379,8 +380,18 @@
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td>Flooded: One year later, assessing what was lost and what was found when
-                                                a ravaging rain swept through metro Detroit
+                                            <td>
+                                                <div class="row">
+                                                    <select class="dropdown-header dropdown col-md-3">
+                                                        <option>Select student</option>
+                                                    </select>
+                                                    <div class="col-md-1"></div>
+                                                    <select class="dropdown-header dropdown col-md-3">
+                                                        <option>Select subject</option>
+                                                    </select>
+                                                    <div class="col-md-1"></div>
+                                                    <button class="col-md-3 btn btn-success btn-sm">View</button>
+                                                </div>
                                             </td>
                                             <td class="td-actions text-right">
                                                 <button type="button" rel="tooltip" title="Edit Task"
@@ -401,7 +412,7 @@
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                            <td></td>
                                             <td class="td-actions text-right">
                                                 <button type="button" rel="tooltip" title="Edit Task"
                                                         class="btn btn-primary btn-simple btn-xs">
@@ -492,45 +503,45 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="card">
                         <div class="card-header" data-background-color="orange">
-                            <h4 class="title">Last Semester Results</h4>
+                            <h4 class="title">Compare Alec with <i>John</i> on Mathematics</h4>
                             <p class="category">3<sup>rd</sup> term test: September, 2016</p>
                         </div>
                         <div class="card-content table-responsive">
-                            <table class="table table-hover">
-                                <thead class="text-warning">
-                                <th>ID</th>
-                                <th>Subject</th>
-                                <th>Marks</th>
-                                <th>Grade</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mathematics</td>
-                                    <td>80</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>IT</td>
-                                    <td>20</td>
-                                    <td>F</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Sinhala</td>
-                                    <td>70</td>
-                                    <td>B</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>English</td>
-                                    <td>50</td>
-                                    <td>C</td>
-                                </tr>
-
-                                </tbody>
-                            </table>
+                            <!--                            <table class="table table-hover">-->
+                            <!--                                <thead class="text-warning">-->
+                            <!--                                <th>ID</th>-->
+                            <!--                                <th>Subject</th>-->
+                            <!--                                <th>Marks</th>-->
+                            <!--                                <th>Grade</th>-->
+                            <!--                                </thead>-->
+                            <!--                                <tbody>-->
+                            <!--                                <tr>-->
+                            <!--                                    <td>1</td>-->
+                            <!--                                    <td>Mathematics</td>-->
+                            <!--                                    <td>80</td>-->
+                            <!--                                    <td>A</td>-->
+                            <!--                                </tr>-->
+                            <!--                                <tr>-->
+                            <!--                                    <td>2</td>-->
+                            <!--                                    <td>IT</td>-->
+                            <!--                                    <td>20</td>-->
+                            <!--                                    <td>F</td>-->
+                            <!--                                </tr>-->
+                            <!--                                <tr>-->
+                            <!--                                    <td>3</td>-->
+                            <!--                                    <td>Sinhala</td>-->
+                            <!--                                    <td>70</td>-->
+                            <!--                                    <td>B</td>-->
+                            <!--                                </tr>-->
+                            <!--                                <tr>-->
+                            <!--                                    <td>4</td>-->
+                            <!--                                    <td>English</td>-->
+                            <!--                                    <td>50</td>-->
+                            <!--                                    <td>C</td>-->
+                            <!--                                </tr>-->
+                            <!---->
+                            <!--                                </tbody>-->
+                            <!--                            </table>-->
                         </div>
                     </div>
                 </div>
@@ -761,7 +772,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Marks of student with class average'
+                text: 'Average marks of student with class average'
             },
             subtitle: {
                 text: ''
