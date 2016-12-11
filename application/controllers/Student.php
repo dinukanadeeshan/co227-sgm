@@ -10,9 +10,37 @@ class Student extends CI_Controller
 {
 
 
-    public function auto_search()
+    public function search()
     {
-        return $this->load;
+        $search = $this->input->post('search');
+        // echo $search;
+        $query = $this->Student_model->searchStudent($search);
+//        echo $query;
+        //echo "<br>";
+        echo json_encode($query);
+    }
+
+
+    public function marks()
+    {
+        $index = $this->input->post('index');
+
+        $result = $this->testdb_model->getMarks($index);
+
+        echo json_encode($result);
+    }
+
+    public function getGrade()
+    {
+        $index = $this->input->post('index');
+        $result = $this->Student_model->getGradeForIndex($index);
+        echo json_encode($result);
+    }
+
+    public function getRanks()
+    {
+        $index = $this->input->post('index');
+
     }
 
 }

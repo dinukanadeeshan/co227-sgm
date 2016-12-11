@@ -29,7 +29,7 @@ class Welcome extends CI_Controller {
 //
 //        $this->load->view('template/footer');
 
-        echo 'welcome!!';
+        echo $this->testdb_model->getMsg();
 
     }
 }

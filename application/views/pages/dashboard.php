@@ -47,38 +47,51 @@
                 </ul>
 
                 <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group  is-empty">
-                        <input type="text" class="form-control" id="search" placeholder="Search">
+                    <div class="form-group is-empty dropdown">
+                        <input type="text" class="form-control dropdown-toggle" id="search" data-toggle="dropdown"
+                               placeholder="Search">
                         <span class="material-input"></span>
+                        <div class="card-content">
+                            <ul id="finalResults" class="dropdown-menu"></ul>
+                        </div>
                     </div>
+
                     <button type="submit" class="btn btn-white btn-round btn-just-icon">
                         <i class="material-icons">search</i>
-                        <div class="ripple-container"></div>
+
                     </button>
+
+
                 </form>
             </div>
         </div>
     </nav>
 
     <div class="content">
+
+
         <div class="container-fluid">
+            <div>
+                <!--                <a rel="" class="btn btn-primary" href="www.google.com">click</a>-->
+                <!--                <button id="btn_click">click this</button>-->
+            </div>
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <div class="card card-profile">
+                    <div class="card card-profile" style="display: none;" id="profile">
                         <div class="card-avatar">
                             <a href="#pablo">
-                                <img class="img" src="<?php echo base_url() ?>assets/img/faces/marc.jpg"/>
+                                <img class="img" id="proPic" src=""/>
                             </a>
                         </div>
 
                         <div class="content">
 
 
-                            <h4 class="card-title">Alec Thompson</h4>
-                            <h6 class="category text-gray">--- 13827 ---</h6>
+                            <h4 class="card-title" id="studentName"></h4>
+                            <h6 class="category text-gray" id="indexNo"></h6>
                             <p class="">
-                                <label>Grade 10</label>
+                                <label id="gradeLable"></label>
                             </p>
 
                             <a href="#pablo" class="btn btn-sm btn-primary btn-round">More Details</a>
@@ -86,73 +99,7 @@
                     </div>
                 </div>
                 <div class="col-md-3"></div>
-                <!--                <div class="col-lg-4 col-md-6 col-sm-6">-->
-                <!--                    <div class="card card-stats">-->
-                <!--                        <div class="card-header" data-background-color="orange">-->
-                <!--                            <i class="material-icons"></i>-->
-                <!--                        </div>-->
-                <!--                        <div class="card-content">-->
-                <!--                            <p class="category">Used Space</p>-->
-                <!--                            <h3 class="title">49/50-->
-                <!--                                <small>GB</small>-->
-                <!--                            </h3>-->
-                <!--                        </div>-->
-                <!--                        <div class="card-footer">-->
-                <!--                            <div class="stats">-->
-                <!--                                <i class="material-icons text-danger">warning</i> <a href="#pablo">Get More Space...</a>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <div class="col-lg-4 col-md-6 col-sm-6">-->
-                <!--                    <div class="card card-stats">-->
-                <!--                        <div class="card-header" data-background-color="green">-->
-                <!--                            <i class="material-icons">store</i>-->
-                <!--                        </div>-->
-                <!--                        <div class="card-content">-->
-                <!--                            <p class="category">Revenue</p>-->
-                <!--                            <h3 class="title">$34,245</h3>-->
-                <!--                        </div>-->
-                <!--                        <div class="card-footer">-->
-                <!--                            <div class="stats">-->
-                <!--                                <i class="material-icons">date_range</i> Last 24 Hours-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <div class="col-lg-4 col-md-6 col-sm-6">-->
-                <!--                    <div class="card card-stats">-->
-                <!--                        <div class="card-header" data-background-color="red">-->
-                <!--                            <i class="material-icons">info_outline</i>-->
-                <!--                        </div>-->
-                <!--                        <div class="card-content">-->
-                <!--                            <p class="category">Fixed Issues</p>-->
-                <!--                            <h3 class="title">75</h3>-->
-                <!--                        </div>-->
-                <!--                        <div class="card-footer">-->
-                <!--                            <div class="stats">-->
-                <!--                                <i class="material-icons">local_offer</i> Tracked from Github-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
 
-                <!--						<div class="col-lg-3 col-md-6 col-sm-6">-->
-                <!--							<div class="card card-stats">-->
-                <!--								<div class="card-header" data-background-color="blue">-->
-                <!--									<i class="fa fa-twitter"></i>-->
-                <!--								</div>-->
-                <!--								<div class="card-content">-->
-                <!--									<p class="category">Followers</p>-->
-                <!--									<h3 class="title">+245</h3>-->
-                <!--								</div>-->
-                <!--								<div class="card-footer">-->
-                <!--									<div class="stats">-->
-                <!--										<i class="material-icons">update</i> Just Updated-->
-                <!--									</div>-->
-                <!--								</div>-->
-                <!--							</div>-->
-                <!--						</div>-->
             </div>
 
             <div class="row">
@@ -160,7 +107,7 @@
                     <div class="card">
                         <div class="card-header card-chart" data-background-color="green">
                             <!--                            <div class="ct-chart" id="dailySalesChart"></div>-->
-                            <div id="testchart"></div>
+                            <div id="rank_in_class"></div>
                         </div>
                         <div class="card-content">
                             <h4 class="title"></h4>
@@ -212,7 +159,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header card-chart" data-background-color="purple">
-                            <div class="ct-chart" id="completedTasksChart"></div>
+                            <div id="cmpfirstchart"></div>
                         </div>
                         <div class="card-content">
                             <!--                            <h4 class="title">Completed Tasks</h4>-->
@@ -376,7 +323,7 @@
                                             <td>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="optionsCheckboxes" checked>
+                                                        <!--                                                        <input type="checkbox" name="optionsCheckboxes" checked>-->
                                                     </label>
                                                 </div>
                                             </td>
@@ -390,40 +337,40 @@
                                                         <option>Select subject</option>
                                                     </select>
                                                     <div class="col-md-1"></div>
-                                                    <button class="col-md-3 btn btn-success btn-sm">View</button>
+                                                    <button class=" btn btn-success btn-sm col-md-3">View</button>
                                                 </div>
                                             </td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task"
-                                                        class="btn btn-primary btn-simple btn-xs">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove"
-                                                        class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
+                                            <!--                                            <td class="td-actions text-right">-->
+                                            <!--                                                <button type="button" rel="tooltip" title="Edit Task"-->
+                                            <!--                                                        class="btn btn-primary btn-simple btn-xs">-->
+                                            <!--                                                    <i class="material-icons">edit</i>-->
+                                            <!--                                                </button>-->
+                                            <!--                                                <button type="button" rel="tooltip" title="Remove"-->
+                                            <!--                                                        class="btn btn-danger btn-simple btn-xs">-->
+                                            <!--                                                    <i class="material-icons">close</i>-->
+                                            <!--                                                </button>-->
+                                            <!--                                            </td>-->
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="optionsCheckboxes">
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td></td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task"
-                                                        class="btn btn-primary btn-simple btn-xs">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove"
-                                                        class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <div class="checkbox">-->
+                                        <!--                                                    <label>-->
+                                        <!--                                                        <input type="checkbox" name="optionsCheckboxes">-->
+                                        <!--                                                    </label>-->
+                                        <!--                                                </div>-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td></td>-->
+                                        <!--                                            <td class="td-actions text-right">-->
+                                        <!--                                                <button type="button" rel="tooltip" title="Edit Task"-->
+                                        <!--                                                        class="btn btn-primary btn-simple btn-xs">-->
+                                        <!--                                                    <i class="material-icons">edit</i>-->
+                                        <!--                                                </button>-->
+                                        <!--                                                <button type="button" rel="tooltip" title="Remove"-->
+                                        <!--                                                        class="btn btn-danger btn-simple btn-xs">-->
+                                        <!--                                                    <i class="material-icons">close</i>-->
+                                        <!--                                                </button>-->
+                                        <!--                                            </td>-->
+                                        <!--                                        </tr>-->
                                         </tbody>
                                     </table>
                                 </div>
@@ -454,7 +401,7 @@
                                             <td>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="optionsCheckboxes" checked>
+                                                        <!--                                                        <input type="checkbox" name="optionsCheckboxes" checked>-->
                                                     </label>
                                                 </div>
                                             </td>
@@ -472,26 +419,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="optionsCheckboxes">
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task"
-                                                        class="btn btn-primary btn-simple btn-xs">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove"
-                                                        class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -507,41 +435,7 @@
                             <p class="category">3<sup>rd</sup> term test: September, 2016</p>
                         </div>
                         <div class="card-content table-responsive">
-                            <!--                            <table class="table table-hover">-->
-                            <!--                                <thead class="text-warning">-->
-                            <!--                                <th>ID</th>-->
-                            <!--                                <th>Subject</th>-->
-                            <!--                                <th>Marks</th>-->
-                            <!--                                <th>Grade</th>-->
-                            <!--                                </thead>-->
-                            <!--                                <tbody>-->
-                            <!--                                <tr>-->
-                            <!--                                    <td>1</td>-->
-                            <!--                                    <td>Mathematics</td>-->
-                            <!--                                    <td>80</td>-->
-                            <!--                                    <td>A</td>-->
-                            <!--                                </tr>-->
-                            <!--                                <tr>-->
-                            <!--                                    <td>2</td>-->
-                            <!--                                    <td>IT</td>-->
-                            <!--                                    <td>20</td>-->
-                            <!--                                    <td>F</td>-->
-                            <!--                                </tr>-->
-                            <!--                                <tr>-->
-                            <!--                                    <td>3</td>-->
-                            <!--                                    <td>Sinhala</td>-->
-                            <!--                                    <td>70</td>-->
-                            <!--                                    <td>B</td>-->
-                            <!--                                </tr>-->
-                            <!--                                <tr>-->
-                            <!--                                    <td>4</td>-->
-                            <!--                                    <td>English</td>-->
-                            <!--                                    <td>50</td>-->
-                            <!--                                    <td>C</td>-->
-                            <!--                                </tr>-->
-                            <!---->
-                            <!--                                </tbody>-->
-                            <!--                            </table>-->
+
                         </div>
                     </div>
                 </div>
@@ -578,7 +472,7 @@
             <p class="copyright pull-right">
                 &copy;
                 <script>document.write(new Date().getFullYear())</script>
-                <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                <a href="">SGM System</a>, made with love for a better monitoring
             </p>
         </div>
     </footer>
@@ -587,259 +481,156 @@
 <script src="<?php echo base_url() ?>assets/js/highchart/exporting.js"></script>
 <script src="<?php echo base_url() ?>assets/js/highchart/highcharts.js"></script>
 
-<script>
+<script src="<?php echo base_url() ?>assets/js/dashboard_charts.js" type="text/javascript">
 
 
-    $(function () {
+</script>
 
-        //autocomplete
-//        $("#search").autocomplete({
-//            source: "<?php //echo base_url(); ?>//index.php/student/auto_search",
-//            minLength: 1
+
+<script type="text/javascript">
+    //    $("#btnu").click(function () {
+    //        var x = $('input[type=file]')[0].files[0].path;
+    //        $("#txt").val(x);
+    //
+    //    })
+
+    $('document').ready(function () {
+//
+        // I have to create
+//        $('#finalResults').click(function (event){
+//            event.preventDefault();
+//
+//            console.log('clicked');
+//
+//            $("#finalResults li").click(function (event){
+//                event.preventDefault();
+//                var x = $(this).attr('value');
+//                alert('clicked ' + x);
+//                return true;
+//            });
+//
+//
+//            return false; //for good measure
 //        });
+//
 
-        Highcharts.chart('testchart', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Rank in the class'
-            },
-            subtitle: {
-                text: 'out of 40 students'
-            },
-            xAxis: {
-                categories: ['Grade-6', 'Grade-7', 'Grade-8', 'Grade-9', 'Grade-10', 'Grade-11']
-            },
-            yAxis: {
-                reversed: true,
-                min: 1,
 
-                title: {
-                    text: 'Place '
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: false
+        $("#search").keyup(function () {
+            if ($("#search").val().length >= 1) {
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo site_url('student/search'); ?>",
+                    cache: false,
+                    data: 'search=' + $("#search").val(),
+                    success: function (response) {
+                        $('#finalResults').html("");
+                        // alert('ok');
+                        var obj = JSON.parse(response);
+                        if (obj.length > 0) {
+                            try {
+                                var items = [];
+                                // var i = 0;
+                                $.each(obj, function (i, val) {
+                                    console.log(val.index + " " + val.fname + " " + val.lname);
+
+                                    items.push($("<li/>").html("<a id='" + val.index + "' href='#'" +
+                                        " onclick='studentSelect(" + val.index + ")' >" + val.fname + " " + val.lname + "</a>"));
+
+                                    //   i++;
+                                });
+                                $('#finalResults').append.apply($('#finalResults'), items);
+                            } catch (e) {
+                                alert('Exception while request..');
+                            }
+                        } else {
+                            $('#finalResult').html($('<li/>').text("No Data Found"));
+                        }
+
+                        //   $("#finalResult").show();
+
                     },
-                    enableMouseTracking: true
-                }
-            },
-            series: [{
-                name: ' ',
-                data: [23, 19, 15, 14, 10]
-            },]
+                    error: function ($error) {
+                        console.log($error);
+                        alert($error);
+                    }
+
+                });
+            }
+            $('#finalResults').html("");
+            return false;
         });
 
-        Highcharts.chart('marksChart', {
-            title: {
-                text: 'Average marks for each subject',
-                x: -20 //center
-            },
-            subtitle: {
-                text: null,
-                x: -20
-            },
-            xAxis: {
-                title: {
-                    text: 'Grades'
-                },
-                categories: ['Grade-6', 'Grade-7', 'Grade-8', 'Grade-9', 'Grade-10', 'Grade-11']
-            },
-            yAxis: {
-                min: 0,
-                max: 100,
-                title: {
-                    text: 'Marks (%)'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            // tooltip: {
-            //     valueSuffix: '°C'
-            // },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: [{
-                name: 'Sinhala',
-                data: [25, 30, 95, 45, 82, 25]
-            }, {
-                name: 'Maths',
-                data: [52, 65, 33, 83, 39, 96]
-            }, {
-                name: 'Buddhism',
-                data: [91, 62, 35, 84, 75, 70]
-            }, {
-                name: 'History',
-                data: [86, 79, 43, 90, 59, 78]
-            }, {
-                name: 'Science',
-                data: [86, 79, 43, 90, 39, 99]
-            }, {
-                name: 'English',
-                data: [92, 64, 35, 54, 35, 70]
-            }, {
-                name: 'Art',
-                data: [23, 13, 24, 45, 34, 23]
-            }, {
-                name: 'Health',
-                data: [78, 89, 79, 80, 90, 100]
-            }, {
-                name: 'Tech. Skills',
-                data: [null, null, null, null, 56, 70]
-            }]
-        });
-
-
-        Highcharts.chart('allmarkschart', {
-            chart: {
-                type: 'bar',
-                inverted: true,
-                polar: false
-            },
-            title: {
-                text: 'All marks in Grade 10'
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-
-                categories: ['sinhala', 'Maths', 'Buddhism', 'History', 'English', 'Science', 'Art', 'Health', 'Tech.Skills'],
-                title: {
-                    text: 'Subjects'
-                }
-            },
-            yAxis: {
-                min: 0,
-                max: 100,
-                title: {
-                    text: 'Marks (%) ',
-                    align: 'high'
-                },
-                labels: {
-                    overflow: 'justify'
-                }
-            },
-            tooltip: {
-                valueSuffix: ' %'
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                        enabled: false
-                    }
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 80,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                shadow: true
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: 'First Term',
-                data: [17, 31, 63, 63, 68, 80, 56, 78, 67]
-            }, {
-                name: 'Second term',
-                data: [33, 56, 97, 48, 69, 84, 45, 79, 98]
-            }, {
-                name: 'Third term',
-                data: [52, 54, 50, 74, 38, 88, 34, 56, 23]
-            }]
-        });
-
-
-        Highcharts.chart('classavgchart', {
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Average marks of student with class average'
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: [{
-                categories: ['sinhala', 'Maths', 'Buddhism', 'History', 'English', 'Science', 'Art', 'Health', 'Tech.Skills'],
-                crosshair: true
-            }],
-            yAxis: [{ // Primary yAxis
-                min: 0,
-                max: 100,
-                labels: {
-                    format: '{value}',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                title: {
-                    text: 'Class Average',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                }
-            }, { // Secondary yAxis
-                min: 0,
-                max: 100,
-                title: {
-                    text: 'Marks of student',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                labels: {
-                    format: '{value}',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                opposite: true
-            }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 120,
-                verticalAlign: 'middle',
-                y: 100,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                name: 'Marks of student',
-                type: 'column',
-                yAxis: 1,
-                data: [46, 71, 64, 92, 44, 76, 56, 85, 64],
-
-
-            }, {
-                name: 'Class Average',
-                type: 'spline',
-                data: [50, 69.5, 53.2, 45.3, 42.6, 67.6, 52, 65, 39.9],
-                tooltip: {
-                    valueSuffix: null
-                }
-            }]
-        });
     });
+
+    function studentSelect(index) {
+        //alert(no);
+
+
+        $.ajax({
+            type: 'post',
+            url: "<?php echo site_url('student/marks')?>",
+            data: 'index=' + index,
+            success: function (response) {
+                // alert(response);
+
+                drawRankInClassGraph(response);
+
+                drawGraphs(response);
+
+
+                $("#proPic").attr("src", "<?php echo base_url() ?>assets/img/faces/" + index + ".jpg");
+
+                $("#studentName").text($("#" + index).text());
+                $("#indexNo").text("--- " + index + " ---");
+                $("#profile").show();
+
+                $("#search").val("");
+
+                // Get the grade and class for specific student
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('student/getGrade')?>",
+                    data: 'index=' + index,
+                    success: function (response) {
+
+                        var obj = JSON.parse(response);
+                        $.each(obj, function (i, val) {
+                            $("#gradeLable").text("Grade " + val.grade + " - " + val.name);
+                        });
+
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+                //Get the ranks for student
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('student/getRanks')?>",
+                    data: 'index=' + index,
+                    success: function (response) {
+
+                        var obj = JSON.parse(response);
+                        $.each(obj, function (i, val) {
+                            $("#gradeLable").text("Grade " + val.grade + " - " + val.name);
+                        });
+
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+
+    }
+
+
 </script>

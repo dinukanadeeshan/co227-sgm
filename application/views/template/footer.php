@@ -22,16 +22,6 @@
 <!--<script src="--><?php //echo base_url() ?><!--assets/js/demo.js"></script>-->
 
 <script type="text/javascript">
-    $(document).ready(function () {
-
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-
-        $('#log_in_btn').on('click', function (e) {
-            alert('this is click');
-        });
-
-    });
 
 
 </script>
