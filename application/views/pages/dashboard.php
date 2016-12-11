@@ -575,9 +575,6 @@
 
                 drawRankInClassGraph(response);
 
-                drawGraphs(response);
-
-
                 $("#proPic").attr("src", "<?php echo base_url() ?>assets/img/faces/" + index + ".jpg");
 
                 $("#studentName").text($("#" + index).text());
@@ -586,6 +583,7 @@
 
                 $("#search").val("");
 
+                var grade;
                 // Get the grade and class for specific student
                 $.ajax({
                     type: 'post',
@@ -595,6 +593,7 @@
 
                         var obj = JSON.parse(response);
                         $.each(obj, function (i, val) {
+                            grade = val.grade + " - " + val.name;
                             $("#gradeLable").text("Grade " + val.grade + " - " + val.name);
                         });
 
@@ -604,24 +603,140 @@
                     }
                 });
 
-                //Get the ranks for student
+
+                //Get the  last term marks  for student
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo site_url('student/getRanks')?>",
+                    url: "<?php echo site_url('student/getLastTermMarks')?>",
                     data: 'index=' + index,
                     success: function (response) {
-
                         var obj = JSON.parse(response);
-                        $.each(obj, function (i, val) {
-                            $("#gradeLable").text("Grade " + val.grade + " - " + val.name);
+                        var subjects;
+                        var marks;
+                        var terms;
+                        $.each(obj, function (index, element) {
+                            //console.log( element);
+                            if (index === 0) {
+                                terms = element;
+                            }
+                            if (index === 1) {
+                                subjects = element;
+                            }
+                            if (index === 2) {
+                                marks = element;
+                            }
+
                         });
+
+
+                        // console.log('index is  '+index);
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo site_url('student/getClassAvgMarks')?>",
+                            data: 'index=' + index,
+
+                            success: function (response) {
+                                var obj = JSON.parse(response);
+                                var clsAvg = [];
+                                $.each(obj, function (i, val) {
+
+
+                                    clsAvg.push(parseFloat(val.avg));
+                                });
+                                drawClassAvgGraph(subjects, terms, marks, clsAvg);
+
+                                //  console.log('come he '+clsAvg);
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        });
+
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo site_url('student/class1stMarks')?>",
+                            data: 'index=' + index,
+
+                            success: function (response) {
+                                var obj = JSON.parse(response);
+                                var cls1st = [];
+                                $.each(obj, function (i, val) {
+
+
+                                    cls1st.push(-1 * parseFloat(val));
+                                });
+                                console.log('come he ' + cls1st);
+                                drawGraphWith1stInClass(subjects, terms, marks, cls1st);
+
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        });
+
+
+                        // console.log(clsAvg+" ----- ");
+//                        console.log($("#" + index).text());
+
+                        drawLastTermMarksGraph(subjects, terms, marks, grade);
+
 
                     },
                     error: function (error) {
                         console.log(error);
                     }
                 });
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('student/allClassAvgMarks')?>",
+                    data: 'index=' + index,
 
+                    success: function (response) {
+                        var obj = JSON.parse(response);
+                        var subjects = [];
+
+                        var class_grade = [];
+
+                        $.each(obj, function (index, element) {
+                            // console.log(element.grade+ ' --- '+element.subject_name);
+
+                            if (subjects.indexOf(element.subject_name) < 0) {
+                                subjects.push(element.subject_name)
+                            }
+
+
+                            if (class_grade.indexOf(element.grade + ' - ' + element.class_name) < 0) {
+                                class_grade.push(element.grade + ' - ' + element.class_name);
+                            }
+
+                        });
+
+                        var series = [];
+                        $.each(subjects, function (i, val) {
+                            var tempMarks = [];
+                            $.each(obj, function (index, element) {
+                                if (element.subject_name === val) {
+                                    tempMarks.push(parseFloat(element.avg));
+                                }
+                            });
+
+                            var jsonObj = {
+                                name: val,
+                                data: tempMarks
+                            };
+
+                            series.push(jsonObj);
+
+                        });
+
+
+                        drawAvgMarksGraphsForAll(class_grade, subjects, series);
+
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
 
             },
             error: function (error) {

@@ -23,6 +23,10 @@ class Student_model extends CI_Model
             'Student_index', $index
         );
 
+
+        $this->db->order_by('year', 'desc');
+        $this->db->limit(1);
+
         $this->db->join('Student_Class sc', 'sc.Class_id = c.id', 'left');
 
 
@@ -30,5 +34,159 @@ class Student_model extends CI_Model
 //        return 'test';
 
     }
+
+    public function getLatestClassYear($index)
+    {
+
+
+        $result = $this->db->get()->row_array();
+
+        return $result['year'];
+    }
+
+    public function getStudent_s_Class_for_year($index)
+    {
+
+        $this->db->select('year');
+        $this->db->from('Class c');
+        $this->db->where([
+
+            'Student_index' => $index
+        ]);
+        $this->db->join('Student_Class sc', 'sc.Class_id = c.id', 'left')
+            ->order_by('year', 'desc')
+            ->limit(1);
+        $sub_query = $this->db->get_compiled_select();
+
+
+        $this->db->select('c.id');
+        $this->db->from('Class c');
+        $this->db->where("year = ($sub_query)", null, false);
+        $this->db->where([
+
+            'Student_index' => $index
+        ]);
+        $this->db->join('Student_Class sc', 'sc.Class_id = c.id', 'left');
+
+//        return $this->db->get_compiled_select();
+
+        $result = $this->db->get()->row_array();
+
+        return $result['id'];
+
+    }
+
+    public function getStudent_ClassId($index)
+    {
+        $this->db->select('sc.id');
+        $this->db->from('Class c');
+        $this->db->where([
+
+            'Student_index' => $index
+        ]);
+        $this->db->join('Student_Class sc', 'sc.Class_id = c.id', 'left')
+            ->order_by('year', 'desc')
+            ->limit(1);
+
+        $result = $this->db->get()->row_array();
+
+        return $result['id'];
+
+    }
+
+    public function getClassFirstId($classId)
+    {
+        $restult = $this->db
+            ->query("SELECT sc.id FROM marks m, student_class sc WHERE m.Student_Class_id = sc.id 
+    AND m.Student_Class_id in (SELECT id from student_class where Class_id = $classId) AND m.term = 3 GROUP BY m.Student_Class_id 
+    ORDER BY SUM(m.value) DESC LIMIT 1")
+            ->row_array();
+        return $restult['id'];
+    }
+
+    public function getAllClassAvgMarks($index)
+    {
+
+        $restult = $this->db
+            ->query("SELECT c.grade, c.name as class_name, AVG(m.value) as avg , s.name as subject_name
+                FROM class c, marks m, student_class sc, subject s
+                WHERE c.id = sc.Class_id AND m.Student_Class_id = sc.id AND sc.Student_index = $index  AND s.code = m.Subject_code
+                GROUP BY c.id, m.Subject_code")
+            ->result_array();
+
+        return $restult;
+
+    }
+
+
+    public function getClassAvg($class_id)
+    {
+        $restult = $this->db
+            ->query("SELECT AVG(value) as avg, name FROM marks m, subject s WHERE m.subject_code = s.code 
+          AND Student_Class_id IN (SELECT id from student_class where Class_id = $class_id) and term = 3 GROUP by (subject_code)")
+            ->result_array();
+        return $restult;
+    }
+
+    public function getMarksForStudent($class_id)
+    {
+        $this->db->select('name, value, term')
+            ->from('Marks m')
+            ->join('Subject s', 's.code = m.Subject_code', 'left')
+            ->where('Student_Class_id', $class_id)
+            ->order_by('term', 'asc');
+
+        $result = $this->db->get()->result_array();
+        return $result;
+    }
+
+
+    public function getRankOfClass($class_id)
+    {
+        #sub_query for get term
+
+
+        /*
+
+
+
+
+
+        Have to complete this function
+
+
+
+
+
+
+
+
+        */
+
+        $this->db->select('term')
+            ->from('Marks m')
+            ->where([
+                'Student_Class_id' => $class_id
+            ])
+            ->order_by('term', 'desc')
+            ->limit(1);
+
+        $sub_query = $this->db->get_compiled_select();
+
+
+        #main query
+        $this->db->select('sum(value)');
+        $this->db->from('Marks m');
+
+        $this->db->where("term = ($sub_query)", null, false);
+        $this->db->where([
+            'Student_Class_id' => $class_id
+        ]);
+
+//        return $this->db->get_compiled_select();
+        return $this->db->get()->result_array();
+
+    }
+
 
 }
