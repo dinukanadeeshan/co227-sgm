@@ -13,12 +13,12 @@
 
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="<?php if ($active === 'overall') echo 'active' ?>">
-                <a href="<?php echo site_url('overall'); ?>">
-                    <i class="material-icons">library_books</i>
-                    <p>Overall Class</p>
-                </a>
-            </li>
+            <!--            <li class="--><?php //if ($active === 'overall') echo 'active' ?><!--">-->
+            <!--                <a href="--><?php //echo site_url('overall'); ?><!--">-->
+            <!--                    <i class="material-icons">library_books</i>-->
+            <!--                    <p>Overall Class</p>-->
+            <!--                </a>-->
+            <!--            </li>-->
             <li class="<?php if ($active === 'dashboard') echo 'active' ?>">
                 <a href="<?php echo site_url('dashboard'); ?>">
                     <i class="material-icons">dashboard</i>
@@ -31,12 +31,12 @@
                     <p>User Profile</p>
                 </a>
             </li>
-            <li class="<?php if ($active === 'table_list') echo 'active' ?>">
-                <a href="<?php echo site_url('tablelist'); ?>">
-                    <i class="material-icons">content_paste</i>
-                    <p>Table List</p>
-                </a>
-            </li>
+            <!--            <li class="--><?php //if ($active === 'table_list') echo 'active' ?><!--">-->
+            <!--                <a href="--><?php //echo site_url('tablelist'); ?><!--">-->
+            <!--                    <i class="material-icons">content_paste</i>-->
+            <!--                    <p>Table List</p>-->
+            <!--                </a>-->
+            <!--            </li>-->
 
             <li class="<?php if ($active === 'upload') echo 'active' ?>">
                 <a href="<?php echo site_url('upload'); ?>">

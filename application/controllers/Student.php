@@ -30,6 +30,63 @@ class Student extends CI_Controller
 
     }
 
+    public function getRankForLatestYear()
+    {
+        $index = $this->input->post('index');
+        $result = $this->Student_model->getSumOfMarksOfClass($index);
+        //print_r($result);
+
+        $x = 1;
+        foreach ($result as $obj) {
+
+            if ($obj['Student_index'] == $index) {
+                // echo $obj['Student_index'] . " --------<br>";
+                break;
+            }
+            $x++;
+
+        }
+
+        echo $x;
+
+
+    }
+
+    public function getRanks()
+    {
+        $index = $this->input->post('index');
+        $years = $this->Class_model->getYearListForStudent($index);
+
+        $ranks = array();
+
+        foreach ($years as $y) {
+
+            // print_r($y);
+            $yr = $y['year'];
+
+            $result = $this->Student_model->getSumOfMarksOfClassForYear($index, $yr);
+            //  print_r($result);
+
+            $x = 1;
+            foreach ($result as $obj) {
+
+                if ($obj['Student_index'] == $index) {
+                    // echo $obj['Student_index'] . " --------<br>";
+                    break;
+                }
+                $x++;
+
+            }
+
+            $ranks["$yr"] = $x;
+
+
+        }
+        echo json_encode($ranks);
+
+
+    }
+
 
     public function avgMarksForStudent()
     {
@@ -96,12 +153,7 @@ class Student extends CI_Controller
         echo json_encode($result);
     }
 
-    public function getRanks()
-    {
-        $index = $this->input->post('index');
 
-
-    }
 
     public function class1stMarks()
     {

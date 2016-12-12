@@ -36,4 +36,13 @@ class  Class_model extends CI_Model
         return $restult['id'];
     }
 
+    public function getYearListForStudent($index)
+    {
+        $restult = $this->db
+            ->query("SELECT DISTINCT year FROM class c, student_class sc where c.id = sc.Class_id and sc.Student_index = $index")
+            ->result_array();
+
+        return $restult;
+    }
+
 }

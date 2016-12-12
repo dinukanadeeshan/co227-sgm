@@ -33,16 +33,63 @@ class Upload extends CI_Controller
 
         $grade = $this->input->post('grade');
 
-        $class = $this->input->post('class');
+        $name = $this->input->post('class');
 
         $subject = $this->input->post('subject');
 
+        $classId = $this->Class_model->getClassId($grade, $name);
 
-        $data['grade'] = $grade;
-        $data['class'] = $class;
-        $data['subject'] = $subject;
+        $file = $_FILES['file']['tmp_name'];
 
-        echo "Under Construction";
+
+        $handle = fopen($file, "r");
+
+
+        while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
+            if ($fileop[0] != 'index') {
+
+
+                $index = $fileop[0];
+
+                $studentClassId = $this->Student_Class_model->getStudentClassID($classId, $index);
+
+
+                $value = intval($fileop[1]);
+                $term = $fileop[2];
+
+                $gradePoint = 'A';
+
+                if ($value < 35) {
+                    $gradePoint = 'F';
+                } else if ($value < 50) {
+                    $gradePoint = 'S';
+                } else if ($value < 65) {
+                    $gradePoint = 'C';
+                } else if ($value < 75) {
+                    $gradePoint = 'B';
+                }
+
+
+                $data = array(
+                    'Student_Class_id' => $studentClassId,
+                    'Subject_code' => $subject,
+                    'value' => $value,
+                    'term' => $term,
+                    'grade' => $gradePoint
+
+                );
+
+                $res = $this->Marks_model->insertMarks($data);
+
+
+                if ($res == 1) {
+                    echo 'File uploaded successfully';
+                }
+
+            };
+        }
+
+
 
 
     }
@@ -86,8 +133,11 @@ class Upload extends CI_Controller
                         'Class_id' => $classId
                     );
                     $res = $this->Student_Class_model->registerStudentsToClass($data);
-                    echo $res;
 
+
+                }
+                if ($res == 1) {
+                    echo 'File uploaded successfully';
                 }
 
             };
@@ -98,10 +148,24 @@ class Upload extends CI_Controller
 
     public function class_marks()
     {
-        echo 'wow';
-        echo $this->input->post('grade');
+        $grade = $this->input->post('grade');
+        $name = $this->input->post('class');
 
-        echo "Under Construction";
+
+        $classId = $this->Class_model->getClassId($grade, $name);
+
+        $file = $_FILES['file']['tmp_name'];
+
+
+        $handle = fopen($file, "r");
+
+
+        while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
+
+            if ($fileop[0] != 'index') {
+
+            }
+        }
     }
 
 

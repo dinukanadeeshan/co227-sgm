@@ -182,52 +182,30 @@ class Student_model extends CI_Model
     }
 
 
-    public function getRankOfClass($class_id)
+    public function getSumOfMarksOfClass($index)
     {
-        #sub_query for get term
 
+        return $this->db->query("SELECT SUM(m.value) as total, sc.Student_index FROM marks m, student_class sc
+             WHERE m.Student_Class_id = sc.id AND m.term = 3 
+             AND sc.Class_id = 
+             (SELECT c.id from class c, student_class s WHERE c.id = s.Class_id AND s.Student_index = $index ORDER BY c.year DESC LIMIT 1)
+              GROUP BY sc.Student_index ORDER BY 1 DESC")
+            ->result_array();
 
-        /*
-
-
-
-
-
-        Have to complete this function
-
-
-
-
-
-
-
-
-        */
-
-        $this->db->select('term')
-            ->from('Marks m')
-            ->where([
-                'Student_Class_id' => $class_id
-            ])
-            ->order_by('term', 'desc')
-            ->limit(1);
-
-        $sub_query = $this->db->get_compiled_select();
-
-
-        #main query
-        $this->db->select('sum(value)');
-        $this->db->from('Marks m');
-
-        $this->db->where("term = ($sub_query)", null, false);
-        $this->db->where([
-            'Student_Class_id' => $class_id
-        ]);
-
-//        return $this->db->get_compiled_select();
-        return $this->db->get()->result_array();
 
     }
 
+    public function getSumOfMarksOfClassForYear($index, $year)
+    {
+
+        return $this->db->query("SELECT SUM(m.value) as total, sc.Student_index FROM marks m, student_class sc
+             WHERE m.Student_Class_id = sc.id AND m.term = 3 
+             AND sc.Class_id = 
+             (SELECT c.id from class c, student_class s WHERE c.id = s.Class_id AND s.Student_index = $index AND c.year = $year)
+              GROUP BY sc.Student_index ORDER BY 1 DESC")
+            ->result_array();
+
+
+    }
 
 }

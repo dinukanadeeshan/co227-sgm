@@ -266,7 +266,8 @@ function drawLastTermMarksGraph(subjects, terms, marks, grade) {
 
 }
 
-function drawRankInClassGraph(data) {
+function drawRankInClassGraph($year, $ranks) {
+    console.log('this is it');
     Highcharts.chart('rank_in_class', {
         chart: {
             type: 'line'
@@ -278,7 +279,7 @@ function drawRankInClassGraph(data) {
             text: 'out of 40 students'
         },
         xAxis: {
-            categories: ['Grade-6', 'Grade-7', 'Grade-8', 'Grade-9', 'Grade-10', 'Grade-11']
+            categories: $year
         },
         yAxis: {
             reversed: true,
@@ -298,9 +299,10 @@ function drawRankInClassGraph(data) {
         },
         series: [{
             name: ' ',
-            data: [23, 19, 15, 14, 10]
+            data: $ranks
         },]
     });
+
 }
 
 function drawCompareSubjectMarksAvg(name1, name2, categories, marks1, marks2, subject) {

@@ -79,13 +79,13 @@
                                             <div class="ripple-container"></div>
                                         </a>
                                     </li>
-                                    <li class="">
-                                        <a href="#settings" data-toggle="tab">
-                                            <i class="material-icons">class</i>
-                                            Class marks
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    </li>
+                                    <!--                                    <li class="">-->
+                                    <!--                                        <a href="#settings" data-toggle="tab">-->
+                                    <!--                                            <i class="material-icons">class</i>-->
+                                    <!--                                            Class marks-->
+                                    <!--                                            <div class="ripple-container"></div>-->
+                                    <!--                                        </a>-->
+                                    <!--                                    </li>-->
                                     <li class="">
                                         <a href="#profile" data-toggle="tab">
 
@@ -158,7 +158,7 @@
                                                 </div>
 
 
-                                                <input class="form-group btn btn-block" type="file" name="fileToUpload"
+                                                <input class="form-group btn btn-block" type="file" name="file"
                                                 >
                                                 <input class="form-group btn btn-twitter" type="submit"
                                                        value="Upload CSV" name="submit">
@@ -179,66 +179,66 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane" id="settings">
-                                <table class="table ">
-                                    <tbody>
-                                    <tr>
-
-                                        <td class="form-rose">
-
-                                            <form class="form-inline" action="upload/class_marks" method="post"
-                                                  enctype="multipart/form-data">
-                                                <label class="form-group">Select Class marks CSV file to upload:</label>
-
-                                                <br>
-                                                <div class="form-group">
-                                                    <select
-                                                        class="dropdown-header dropdown" name="grade">
-                                                        <option value=null disabled selected hidden>Select Grade
-                                                        </option>
-                                                        <?php
-                                                        foreach ($grades as $g) {
-
-                                                            echo "<option value='" . $g['grade'] . "'>" . $g['grade'] . "</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <select
-                                                        class="dropdown-header dropdown" name="class">
-                                                        <option value=null disabled selected hidden>Select Class
-                                                        </option>
-                                                        <?php
-                                                        foreach ($classes as $g) {
-
-                                                            echo "<option value='" . $g['name'] . "'>" . $g['name'] . "</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-
-                                                <input class="form-group btn btn-block" type="file" name="fileToUpload"
-                                                       id="fileToUpload">
-                                                <input class="form-group btn btn-instagram" type="submit"
-                                                       value="Upload CSV" name="submit">
-                                            </form>
-
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-
-                                        </td>
-                                        <td></td>
-                                        <td class="td-actions text-right">
-
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <!--                            <div class="tab-pane" id="settings">-->
+                            <!--                                <table class="table ">-->
+                            <!--                                    <tbody>-->
+                            <!--                                    <tr>-->
+                            <!---->
+                            <!--                                        <td class="form-rose">-->
+                            <!---->
+                            <!--                                            <form class="form-inline" action="upload/class_marks" method="post"-->
+                            <!--                                                  enctype="multipart/form-data">-->
+                            <!--                                                <label class="form-group">Select Class marks CSV file to upload:</label>-->
+                            <!---->
+                            <!--                                                <br>-->
+                            <!--                                                <div class="form-group">-->
+                            <!--                                                    <select-->
+                            <!--                                                        class="dropdown-header dropdown" name="grade">-->
+                            <!--                                                        <option value=null disabled selected hidden>Select Grade-->
+                            <!--                                                        </option>-->
+                            <!--                                                        --><?php
+                            //                                                        foreach ($grades as $g) {
+                            //
+                            //                                                            echo "<option value='" . $g['grade'] . "'>" . $g['grade'] . "</option>";
+                            //                                                        }
+                            //                                                        ?>
+                            <!--                                                    </select>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="form-group">-->
+                            <!--                                                    <select-->
+                            <!--                                                        class="dropdown-header dropdown" name="class">-->
+                            <!--                                                        <option value=null disabled selected hidden>Select Class-->
+                            <!--                                                        </option>-->
+                            <!--                                                        --><?php
+                            //                                                        foreach ($classes as $g) {
+                            //
+                            //                                                            echo "<option value='" . $g['name'] . "'>" . $g['name'] . "</option>";
+                            //                                                        }
+                            //                                                        ?>
+                            <!--                                                    </select>-->
+                            <!--                                                </div>-->
+                            <!---->
+                            <!--                                                <input class="form-group btn btn-block" type="file" name="file"-->
+                            <!--                                                       id="fileToUpload">-->
+                            <!--                                                <input class="form-group btn btn-instagram" type="submit"-->
+                            <!--                                                       value="Upload CSV" name="submit">-->
+                            <!--                                            </form>-->
+                            <!---->
+                            <!--                                        </td>-->
+                            <!---->
+                            <!--                                    </tr>-->
+                            <!--                                    <tr>-->
+                            <!--                                        <td>-->
+                            <!---->
+                            <!--                                        </td>-->
+                            <!--                                        <td></td>-->
+                            <!--                                        <td class="td-actions text-right">-->
+                            <!---->
+                            <!--                                        </td>-->
+                            <!--                                    </tr>-->
+                            <!--                                    </tbody>-->
+                            <!--                                </table>-->
+                            <!--                            </div>-->
 
                             <div class="tab-pane" id="profile">
                                 <table class="table ">

@@ -39,7 +39,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#pablo" id="log_in_btn" class="btn btn-twitter">
+                        <a href="<?php echo site_url('login') ?>" id="log_in_btn" class="btn btn-twitter">
                             Log in
                             <!--									<p class="hidden-lg hidden-md">Profile</p>-->
                         </a>
@@ -938,6 +938,34 @@
                     $("#subject_select").append("<option value='" + element.code + "'>" + element.code + " : " + element.name + "</option>");
 
                 });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+
+        $.ajax({
+            type: 'post',
+            url: "<?php echo site_url('student/getRanks')?>",
+            data: 'index=' + index,
+
+            success: function (response) {
+
+
+                var obj = JSON.parse(response);
+                var years = [];
+                var ranks = [];
+                $.each(obj, function (index, element) {
+
+                    years.push(index);
+                    ranks.push(parseInt(element));
+
+
+                });
+
+                drawRankInClassGraph(years, ranks);
+                console.log('this is it');
             },
             error: function (error) {
                 console.log(error);
