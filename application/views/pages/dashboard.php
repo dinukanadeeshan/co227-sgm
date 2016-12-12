@@ -173,6 +173,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-chart" data-background-color="blue">
@@ -329,15 +330,18 @@
                                             </td>
                                             <td>
                                                 <div class="row">
-                                                    <select class="dropdown-header dropdown col-md-3">
-                                                        <option>Select student</option>
+                                                    <select class="dropdown-header dropdown col-md-3"
+                                                            id="student_select">
+                                                        <option disabled selected hidden>Select student</option>
                                                     </select>
                                                     <div class="col-md-1"></div>
-                                                    <select class="dropdown-header dropdown col-md-3">
-                                                        <option>Select subject</option>
+                                                    <select class="dropdown-header dropdown col-md-3"
+                                                            id="subject_select">
+                                                        <option disabled selected hidden>Select subject</option>
                                                     </select>
                                                     <div class="col-md-1"></div>
-                                                    <button class=" btn btn-success btn-sm col-md-3">View</button>
+                                                    <button class=" btn btn-success btn-sm col-md-3" id="viewBtn">View
+                                                    </button>
                                                 </div>
                                             </td>
                                             <!--                                            <td class="td-actions text-right">-->
@@ -428,7 +432,46 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-md-12">
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-6" style="display: none" id="cmp_student_subject_div">
+                    <div class="card">
+                        <div class="card-header card-chart"
+                             data-background-color="pink">
+                            <div id="cmp_with_student_subject_chart"></div>
+                        </div>
+                        <div class="card-content">
+                            <!--                        <h4 class="title">Completed Tasks</h4>-->
+                            <!--                        <p class="category">Last Campaign Performance</p>-->
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">access_time</i> campaign sent 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-6" style="display: none" id="cmp_student_subject_avg_div">
+                    <div class="card">
+                        <div class="card-header card-chart"
+                             data-background-color="pink">
+                            <div id="cmp_with_student_subject_avg_chart"></div>
+                        </div>
+                        <div class="card-content">
+                            <!--                        <h4 class="title">Completed Tasks</h4>-->
+                            <!--                        <p class="category">Last Campaign Performance</p>-->
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">access_time</i> campaign sent 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12" style="display: none" id="cmp_student_subject_table_div">
                     <div class="card">
                         <div class="card-header" data-background-color="orange">
                             <h4 class="title">Compare Alec with <i>John</i> on Mathematics</h4>
@@ -440,6 +483,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 
@@ -488,32 +533,140 @@
 
 
 <script type="text/javascript">
-    //    $("#btnu").click(function () {
-    //        var x = $('input[type=file]')[0].files[0].path;
-    //        $("#txt").val(x);
-    //
-    //    })
+
+    searched_student_index = '';
 
     $('document').ready(function () {
-//
-        // I have to create
-//        $('#finalResults').click(function (event){
-//            event.preventDefault();
-//
-//            console.log('clicked');
-//
-//            $("#finalResults li").click(function (event){
-//                event.preventDefault();
-//                var x = $(this).attr('value');
-//                alert('clicked ' + x);
-//                return true;
-//            });
-//
-//
-//            return false; //for good measure
-//        });
-//
 
+        $("#viewBtn").click(function (e) {
+
+            $("#cmp_student_subject_div").show();
+            $("#cmp_student_subject_avg_div").show();
+            //  $("#cmp_student_subject_table_div").show();
+
+            studentIndex = $("#student_select").val();
+            subjectCode = $("#subject_select").val();
+
+
+            var subject = jQuery("#subject_select option:selected").text().substring(4);
+            //console.log(subject);
+
+            var queryString = {
+                'index': studentIndex,
+                'code': subjectCode,
+                'student': searched_student_index
+            };
+
+            $.ajax({
+                type: "post",
+                url: "<?php echo site_url('student/cmp_student_subject'); ?>",
+                cache: false,
+                data: queryString,
+                success: function (response) {
+
+
+                    categories = [];
+                    marks1 = [];
+                    marks2 = [];
+
+
+                    var obj = JSON.parse(response);
+                    $.each(obj, function (i, val) {
+
+                        $.each(val, function (j, ele) {
+
+
+                            if (i == 0) {
+                                categories.push('Grade ' + ele.grade + ' -' + ' term ' + ele.term);
+
+                                marks1.push(parseInt(ele.value));
+
+                            } else {
+                                marks2.push(parseInt(ele.value));
+
+
+                            }
+
+                        });
+
+
+                    });
+
+
+                    queryString = {
+                        'index1': searched_student_index,
+                        'index2': studentIndex
+                    };
+
+                    var name1;
+                    var name2;
+
+                    $.ajax({
+                        type: "post",
+                        url: "<?php echo site_url('student/namesOfStudents'); ?>",
+                        cache: false,
+                        data: queryString,
+                        success: function (response) {
+                            var obj = JSON.parse(response);
+                            name1 = obj.name1;
+                            name2 = obj.name2;
+
+                            drawCompareSubjectMarks(obj.name1, obj.name2, categories, marks1, marks2, subject);
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+
+                    });
+                    queryString = {
+                        'index1': searched_student_index,
+                        'index2': studentIndex,
+                        'code': subjectCode
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: "<?php echo site_url('student/avgMarksForStudent'); ?>",
+                        cache: false,
+                        data: queryString,
+                        success: function (response) {
+                            var obj = JSON.parse(response);
+                            var data1 = obj.data1;
+                            var data2 = obj.data2;
+
+                            avgMarks1 = [];
+                            avgMarks2 = [];
+                            categories_for_avg = [];
+                            $.each(data1, function (j, ele) {
+                                avgMarks1.push(parseFloat(ele.avg));
+
+                                if (categories_for_avg.indexOf('Grade ' + ele.grade) < 0) {
+                                    categories_for_avg.push('Grade ' + ele.grade);
+                                }
+
+                            });
+                            $.each(data2, function (j, ele) {
+                                avgMarks2.push(parseFloat(ele.avg));
+                            });
+
+                            console.log(avgMarks1 + " " + avgMarks2 + ' ');
+                            drawCompareSubjectMarksAvg(name1, name2, categories_for_avg, avgMarks1, avgMarks2, subject);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+
+                    });
+
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+
+        });
 
         $("#search").keyup(function () {
             if ($("#search").val().length >= 1) {
@@ -564,6 +717,13 @@
 
     function studentSelect(index) {
         //alert(no);
+        searched_student_index = index;
+
+        $("#student_select").html("<option disabled selected hidden>Select student</option>");
+        $("#subject_select").html("<option disabled selected hidden>Select subject</option>");
+
+        $("#cmp_student_subject_div").hide();
+        $("#cmp_student_subject_avg_div").hide();
 
 
         $.ajax({
@@ -665,7 +825,7 @@
 
                                     cls1st.push(-1 * parseFloat(val));
                                 });
-                                console.log('come he ' + cls1st);
+
                                 drawGraphWith1stInClass(subjects, terms, marks, cls1st);
 
                             },
@@ -738,6 +898,46 @@
                     }
                 });
 
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+
+        $.ajax({
+            type: 'post',
+            url: "<?php echo site_url('student/allStudents')?>",
+            data: 'index=' + index,
+
+            success: function (response) {
+
+
+                var obj = JSON.parse(response);
+                $.each(obj, function (index, element) {
+
+                    $("#student_select").append("<option value='" + element.index + "'>" + element.index + " : " + element.fname + " " + element.lname + "</option>");
+
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+        $.ajax({
+            type: 'post',
+            url: "<?php echo site_url('subject/subjectForClass')?>",
+            data: 'index=' + index,
+
+            success: function (response) {
+
+
+                var obj = JSON.parse(response);
+                $.each(obj, function (index, element) {
+
+                    $("#subject_select").append("<option value='" + element.code + "'>" + element.code + " : " + element.name + "</option>");
+
+                });
             },
             error: function (error) {
                 console.log(error);

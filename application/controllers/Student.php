@@ -20,6 +20,65 @@ class Student extends CI_Controller
         echo json_encode($query);
     }
 
+    public function allStudents()
+    {
+        $index = $this->input->post('index');
+        $sc_id = $this->Student_model->getStudent_s_Class_for_year($index);
+        $result = $this->Student_model->getAllStudentOfClass($sc_id);
+
+        echo json_encode($result);
+
+    }
+
+
+    public function avgMarksForStudent()
+    {
+        $index1 = $this->input->post('index1');
+        $index2 = $this->input->post('index2');
+        $code = $this->input->post('code');
+        $data1 = $this->Student_model->getAvgMarksForIndex($index1, $code);
+        $data2 = $this->Student_model->getAvgMarksForIndex($index2, $code);
+
+        echo json_encode(array(
+            'data1' => $data1,
+            'data2' => $data2
+        ));
+
+    }
+
+    public function namesOfStudents()
+    {
+        $index1 = $this->input->post('index1');
+        $index2 = $this->input->post('index2');
+
+        $student1 = $this->Student_model->searchStudent($index1);
+        $student2 = $this->Student_model->searchStudent($index2);
+
+        $student1 = reset($student1);
+        $student2 = reset($student2);
+
+
+        echo json_encode(array(
+            'name1' => $student1['fname'] . ' ' . $student1['lname'],
+            'name2' => $student2['fname'] . ' ' . $student2['lname']
+        ));
+
+
+    }
+
+    public function cmp_student_subject()
+    {
+
+        $student_index = $this->input->post('student');
+        $index = $this->input->post('index');
+        $code = $this->input->post('code');
+        $result1 = $this->Student_model->get_marks_for_subject($student_index, $code);
+        $result2 = $this->Student_model->get_marks_for_subject($index, $code);
+
+
+        echo json_encode(array($result1, $result2));
+    }
+
 
     public function marks()
     {

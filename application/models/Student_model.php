@@ -8,10 +8,24 @@
  */
 class Student_model extends CI_Model
 {
-    public function searchStudent($name)
+    public function searchStudent($index)
     {
-        $results = $this->db->query("select * from student WHERE fname like '$name%' or lname like '$name%'")->result_array();
+//        $results = $this->db->query("select * from student WHERE fname like '$name%' or lname like '$name%'")->result_array();
+        $results = $this->db->query("select * from student s WHERE s.index like '$index%'")->result_array();
         return $results;
+    }
+
+    public function getAvgMarksForIndex($index, $code)
+    {
+        $restult = $this->db
+            ->query("SELECT c.grade, c.name as class_name, AVG(m.value) as avg
+                FROM class c, marks m, student_class sc, subject s
+                WHERE c.id = sc.Class_id AND m.Student_Class_id = sc.id AND sc.Student_index = $index  AND s.code = m.Subject_code
+                AND s.code = '$code'
+                GROUP BY c.id")
+            ->result_array();
+
+        return $restult;
     }
 
     public function getGradeForIndex($index)
@@ -42,6 +56,28 @@ class Student_model extends CI_Model
         $result = $this->db->get()->row_array();
 
         return $result['year'];
+    }
+
+
+    public function get_marks_for_subject($index, $code)
+    {
+        $restult = $this->db
+            ->query("SELECT m.value, m.term, c.grade, c.name AS class_name
+         FROM marks m, subject s, student_class sc, class c 
+         WHERE sc.Class_id = c.id AND m.Student_Class_id = sc.id AND m.Subject_code = s.code AND sc.Student_index = $index AND s.code = $code")
+            ->result_array();
+
+        return $restult;
+    }
+
+    public function getAllStudentOfClass($classId)
+    {
+        $restult = $this->db
+            ->query("SELECT s.* FROM student s, student_class sc, class c WHERE s.index = sc.Student_index
+                        AND sc.Class_id = c.id AND c.id=$classId")
+            ->result_array();
+
+        return $restult;
     }
 
     public function getStudent_s_Class_for_year($index)

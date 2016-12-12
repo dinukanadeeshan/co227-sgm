@@ -3,6 +3,8 @@
  */
 
 
+
+
 // $('#btn_click').on('click', function () {
 
 function drawGraphWith1stInClass(subjects, terms, marks, class1stMarks) {
@@ -301,6 +303,175 @@ function drawRankInClassGraph(data) {
     });
 }
 
+function drawCompareSubjectMarksAvg(name1, name2, categories, marks1, marks2, subject) {
+    Highcharts.chart('cmp_with_student_subject_avg_chart', {
+        chart: {
+            type: 'area',
+            inverted: true
+        },
+        title: {
+            text: 'Average marks for ' + subject
+        },
+        subtitle: {
+            style: {
+                position: 'absolute',
+                right: '0px',
+                bottom: '10px'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -10,
+            y: 10,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        xAxis: {
+            categories: categories
+        },
+        yAxis: {
+            title: {
+                text: 'Average Marks'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            },
+            min: 0,
+            max: 100
+        },
+        plotOptions: {
+            area: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+            name: name1,
+            data: marks1
+        }, {
+            name: name2,
+            data: marks2
+        }]
+    });
+}
+
+function drawCompareSubjectMarks(name1, name2, categories, marks1, marks2, subject) {
+    Highcharts.chart('cmp_with_student_subject_chart', {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Compare ' + subject + ' marks with ' + name2
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            // type: 'datetime',
+            labels: {
+                overflow: 'justify'
+            },
+            categories: categories
+        },
+        yAxis: {
+            title: {
+                text: 'Marks'
+
+            },
+            max: 100,
+            min: 0,
+
+            minorGridLineWidth: 0,
+            gridLineWidth: 0,
+            alternateGridColor: null,
+            plotBands: [{ // Light air
+                from: 0,
+                to: 20,
+                color: 'rgba(68, 170, 213, 0.1)',
+                label: {
+                    text: 'Very Weak',
+                    style: {
+                        color: '#FF795C'
+                    }
+                }
+            }, { // Light breeze
+                from: 20,
+                to: 45,
+                color: 'rgba(0, 0, 0, 0)',
+                label: {
+                    text: 'Weak',
+                    style: {
+                        color: '#FAAE9D'
+                    }
+                }
+            }, { // Gentle breeze
+                from: 45,
+                to: 60,
+                color: 'rgba(68, 170, 213, 0.1)',
+                label: {
+                    text: 'Moderate',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, { // Moderate breeze
+                from: 60,
+                to: 80,
+                color: 'rgba(0, 0, 0, 0)',
+                label: {
+                    text: 'Good',
+                    style: {
+                        color: '#6BFBFF'
+                    }
+                }
+            }, { // Fresh breeze
+                from: 80,
+                to: 100,
+                color: 'rgba(68, 170, 213, 0.1)',
+                label: {
+                    text: 'Excelent',
+                    style: {
+                        color: '#4EAFFF'
+                    }
+                }
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' %'
+        },
+        plotOptions: {
+            spline: {
+                lineWidth: 4,
+                states: {
+                    hover: {
+                        lineWidth: 5
+                    }
+                },
+                marker: {
+                    enabled: false
+                }
+
+            }
+        },
+        series: [{
+            name: name1,
+            data: marks1
+
+        }, {
+            name: name2,
+            data: marks2
+        }],
+        navigation: {
+            menuItemStyle: {
+                fontSize: '10px'
+            }
+        }
+    });
+}
 
 function drawAvgMarksGraphsForAll(grades, subjects, series) {
 
@@ -346,34 +517,5 @@ function drawAvgMarksGraphsForAll(grades, subjects, series) {
 
 
 }
-// });
-//
-//
-// [{
-//     name: 'Sinhala',
-//     data: [25, 30, 95, 45, 82, 25]
-// }, {
-//     name: 'Maths',
-//     data: [52, 65, 33, 83, 39, 96]
-// }, {
-//     name: 'Buddhism',
-//     data: [91, 62, 35, 84, 75, 70]
-// }, {
-//     name: 'History',
-//     data: [86, 79, 43, 90, 59, 78]
-// }, {
-//     name: 'Science',
-//     data: [86, 79, 43, 90, 39, 99]
-// }, {
-//     name: 'English',
-//     data: [92, 64, 35, 54, 35, 70]
-// }, {
-//     name: 'Art',
-//     data: [23, 13, 24, 45, 34, 23]
-// }, {
-//     name: 'Health',
-//     data: [78, 89, 79, 80, 90, 100]
-// }, {
-//     name: 'Tech. Skills',
-//     data: [null, null, null, null, 56, 70]
-// }]
+
+
