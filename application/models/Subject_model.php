@@ -17,4 +17,14 @@ class Subject_model extends CI_Model
         return $restult;
     }
 
+
+    public function getAllSubjects()
+    {
+        $restult = $this->db
+            ->query("SELECT DISTINCT name, code FROM Subject")
+            ->result_array();
+
+        return $restult;
+    }
+
 }

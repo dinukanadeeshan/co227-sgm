@@ -58,6 +58,11 @@ class Student_model extends CI_Model
         return $result['year'];
     }
 
+    public function insertStudent($data)
+    {
+        return $this->db->insert('student', $data);
+    }
+
 
     public function get_marks_for_subject($index, $code)
     {

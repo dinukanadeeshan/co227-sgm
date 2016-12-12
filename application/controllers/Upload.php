@@ -8,9 +8,16 @@ class Upload extends CI_Controller
 
         $this->load->view('template/header');
 
+        $grades = $this->Class_model->getAllGrades();
+        $classes = $this->Class_model->getAllClassNames();
+        $subjects = $this->Subject_model->getAllSubjects();
+
 
         $data = array(
-            'active' => 'upload'
+            'active' => 'upload',
+            'grades' => $grades,
+            'classes' => $classes,
+            'subjects' => $subjects
         );
 
         $this->load->view('template/side_bar', $data);
@@ -35,41 +42,66 @@ class Upload extends CI_Controller
         $data['class'] = $class;
         $data['subject'] = $subject;
 
-
-        $res = $this->testdb_model->getMsg($data);
-
-        foreach ($res as $object) {
-            echo $object->grade;
-        }
-
-//        $config['upload_path'] = 'uploads/';
-//        $config['allowed_types'] = 'text/plain|text/csv|csv';
-//        $config['max_size'] = '5000';
-//        $config['file_name'] = 'upload' . time();
-//
-//        $this->load->library('upload', $config);
-//        $this->upload->initialize($config);
-//        if(!$this->upload->do_upload($_FILES['fileToUpload'])) echo $this->upload->display_errors();
-//        else {
-//            $file_info = $this->upload->data();
-//            $csvfilepath = "uploads/" . $file_info['file_name'];
-//            $this->addfromcsv($csvfilepath);
-//
-//        }
+        echo "Under Construction";
 
 
     }
 
     public function student_list()
     {
-        echo 'wow';
-        echo $this->input->post('grade');
+        $grade = $this->input->post('grade');
+        $name = $this->input->post('class');
+
+
+        $classId = $this->Class_model->getClassId($grade, $name);
+
+        $file = $_FILES['file']['tmp_name'];
+
+
+        $handle = fopen($file, "r");
+
+
+        while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
+
+            if ($fileop[0] != 'index') {
+
+                $index = $fileop[0];
+                $fname = $fileop[1];
+                $lname = $fileop[2];
+                $address = $fileop[3];
+                $tele = $fileop[4];
+                $data = array(
+                    'index' => $index,
+                    'fname' => $fname,
+                    'lname' => $lname,
+                    'address' => $address,
+                    'tel' => $tele,
+                );
+
+                $res = $this->Student_model->insertStudent($data);
+
+                if ($res == 1) {
+                    $data = array(
+                        'Student_index' => $index,
+                        'Class_id' => $classId
+                    );
+                    $res = $this->Student_Class_model->registerStudentsToClass($data);
+                    echo $res;
+
+                }
+
+            };
+
+        }
+
     }
 
     public function class_marks()
     {
         echo 'wow';
         echo $this->input->post('grade');
+
+        echo "Under Construction";
     }
 
 

@@ -120,12 +120,12 @@
                                                         class="dropdown-header dropdown" name="grade">
                                                         <option value=null disabled selected hidden>Select Grade
                                                         </option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
+                                                        <?php
+                                                        foreach ($grades as $g) {
+
+                                                            echo "<option value='" . $g['grade'] . "'>" . $g['grade'] . "</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -134,9 +134,12 @@
                                                         <option value=null disabled selected hidden>Select Class
                                                         </option>
 
-                                                        <option value="A">A</option>
-                                                        <option value="B">B</option>
-                                                        <option value="C">C</option>
+                                                        <?php
+                                                        foreach ($classes as $g) {
+
+                                                            echo "<option value='" . $g['name'] . "'>" . $g['name'] . "</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -144,11 +147,13 @@
                                                         class="dropdown-header dropdown" name="subject">
                                                         <option value=null disabled selected hidden>Select Subject
                                                         </option>
+                                                        <?php
+                                                        foreach ($subjects as $subject) {
+                                                            echo "<option value='" . $subject['code'] . "'>" . $subject['name'] . "</option>";
+                                                        }
 
-                                                        <option value="Sinhala">Sinhala</option>
-                                                        <option value="English">English</option>
-                                                        <option value="Mathematics">Mathematics</option>
-                                                        <option value="Science">Science</option>
+                                                        ?>
+
                                                     </select>
                                                 </div>
 
@@ -191,6 +196,12 @@
                                                         class="dropdown-header dropdown" name="grade">
                                                         <option value=null disabled selected hidden>Select Grade
                                                         </option>
+                                                        <?php
+                                                        foreach ($grades as $g) {
+
+                                                            echo "<option value='" . $g['grade'] . "'>" . $g['grade'] . "</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -198,6 +209,12 @@
                                                         class="dropdown-header dropdown" name="class">
                                                         <option value=null disabled selected hidden>Select Class
                                                         </option>
+                                                        <?php
+                                                        foreach ($classes as $g) {
+
+                                                            echo "<option value='" . $g['name'] . "'>" . $g['name'] . "</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
 
@@ -239,12 +256,14 @@
                                                         class="dropdown-header dropdown" name="grade">
                                                         <option value=null disabled selected hidden>Select Grade
                                                         </option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
+
+                                                        <?php
+                                                        foreach ($grades as $g) {
+
+                                                            echo "<option value='" . $g['grade'] . "'>" . $g['grade'] . "</option>";
+                                                        }
+                                                        ?>
+
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -252,11 +271,17 @@
                                                         class="dropdown-header dropdown" name="class">
                                                         <option value=null disabled selected hidden>Select Class
                                                         </option>
+                                                        <?php
+                                                        foreach ($classes as $g) {
+
+                                                            echo "<option value='" . $g['name'] . "'>" . $g['name'] . "</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
 
 
-                                                <input class="form-group btn btn-block" type="file" name="fileToUpload"
+                                                <input class="form-group btn btn-block" type="file" name="file"
                                                        id="fileToUpload">
                                                 <input class="form-group btn btn-success" type="submit"
                                                        value="Upload CSV" name="submit">
@@ -285,24 +310,25 @@
             <div class="col-md-2"></div>
         </div>
 
+        <!--        --><?php
+        //        print_r($grades);
+        //        ?>
+
         <!--        <div><button id="btnu">click</button><input type="text" id="txt"/> </div>-->
     </div>
-    <!--    --><?php
-    //    $target_dir = "uploads/";
-    //    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    //    $uploadOk = 1;
-    //    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-    //    // Check if image file is a actual image or fake image
-    //    if(isset($_POST["submit"])) {
-    //        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    //        if($check !== false) {
-    //            echo "File is an image - " . $check["mime"] . ".";
-    //            $uploadOk = 1;
-    //        } else {
-    //            echo "File is not an image.";
-    //            $uploadOk = 0;
-    //        }
-    //    }
-    //    ?>
+
 </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        grades = JSON.parse('<?= json_encode($grades)?>');
+        classes = JSON.parse('<?= json_encode($classes)?>');
+
+        console.log(grades + ' ' + classes);
+    });
+
+
+</script>
+
 
