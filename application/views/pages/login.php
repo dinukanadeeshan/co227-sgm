@@ -30,25 +30,36 @@
 <!-- Pen Title-->
 <div class="pen-title">
     <h1>Login - Students/Teacher</h1>
+
+    <?php
+        if($this->session->flashdata('error')){
+            $msg = $this->session->flashdata('msg');
+            echo "<h5 style=\"color: red\">$msg</h5>";
+        }
+    ?>
+
 </div>
 <!-- Form Module-->
 <div class="module form-module">
     <div class="toggle"><i class="fa fa-times fa-pencil"></i>
         <div class="tooltip">Click To Teacher Login</div>
     </div>
+
+
+
     <div class="form">
         <h2>Student Login</h2>
-        <form>
-            <input type="text" placeholder="Username"/>
-            <input type="password" placeholder="Password"/>
+        <form method="post" action="<?= site_url('login/student')?>">
+            <input name="username" type="text" placeholder="Username"/>
+            <input name="password" type="password" placeholder="Password"/>
             <button>Login</button>
         </form>
     </div>
     <div class="form">
         <h2>Teacher Login</h2>
-        <form>
-            <input type="text" placeholder="Username"/>
-            <input type="password" placeholder="Password"/>
+        <form  method="post" action="<?= site_url('login/teacher')?>">
+            <input  name="username" type="text" placeholder="Username"/>
+            <input  name="password" type="password" placeholder="Password"/>
             <button>Login</button>
         </form>
         <!--

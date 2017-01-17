@@ -10,6 +10,7 @@ class Student extends CI_Controller
 {
 
 
+    
     public function search()
     {
         $search = $this->input->post('search');
@@ -20,6 +21,7 @@ class Student extends CI_Controller
         echo json_encode($query);
     }
 
+    // Search the all student by startswith index number  in dashboard
     public function allStudents()
     {
         $index = $this->input->post('index');
@@ -30,6 +32,7 @@ class Student extends CI_Controller
 
     }
 
+    // To get the rank for last year result for index of the student
     public function getRankForLatestYear()
     {
         $index = $this->input->post('index');
@@ -52,6 +55,8 @@ class Student extends CI_Controller
 
     }
 
+    
+    // Get the ranks for all students in specific student's class
     public function getRanks()
     {
         $index = $this->input->post('index');
@@ -88,6 +93,7 @@ class Student extends CI_Controller
     }
 
 
+    // Average marks for two students to compare marks
     public function avgMarksForStudent()
     {
         $index1 = $this->input->post('index1');
@@ -103,6 +109,7 @@ class Student extends CI_Controller
 
     }
 
+    // Get the names of two students, search by index no
     public function namesOfStudents()
     {
         $index1 = $this->input->post('index1');
@@ -123,6 +130,7 @@ class Student extends CI_Controller
 
     }
 
+    // Get the marks for specific subject for two students to compare marks
     public function cmp_student_subject()
     {
 
@@ -137,6 +145,7 @@ class Student extends CI_Controller
     }
 
 
+    // This is test function to check db is working
     public function marks()
     {
         $index = $this->input->post('index');
@@ -146,6 +155,7 @@ class Student extends CI_Controller
         echo json_encode($result);
     }
 
+    // Get the current grade of student search by index number
     public function getGrade()
     {
         $index = $this->input->post('index');
@@ -155,6 +165,7 @@ class Student extends CI_Controller
 
 
 
+    // Get the marks of class first/top
     public function class1stMarks()
     {
 
@@ -185,6 +196,7 @@ class Student extends CI_Controller
 
     }
 
+    // Get the all student's average marks for every subject in specific student's class
     public function allClassAvgMarks()
     {
         $index = $this->input->post('index');
@@ -195,6 +207,8 @@ class Student extends CI_Controller
         echo json_encode($result);
     }
 
+    
+    //Get the last term's marks for specific student
     public function getLastTermMarks()
     {
         $index = $this->input->post('index');
@@ -228,6 +242,7 @@ class Student extends CI_Controller
     }
 
 
+    // Get class average for each subject in specific student's class
     public function getClassAvgMarks()
     {
         $index = $this->input->post('index');
@@ -241,6 +256,7 @@ class Student extends CI_Controller
 
     }
 
+    //This is also test function
     public function test()
     {
         $result = $this->Student_model->getClassFirstId(1);

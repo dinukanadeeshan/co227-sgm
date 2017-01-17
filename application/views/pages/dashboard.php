@@ -33,30 +33,49 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo site_url('user') ?>" class="">
-                            <i class="material-icons">person</i>
-                            <p class="hidden-lg hidden-md">Profile</p>
-                        </a>
+                        <!--                        <a href="--><?php //echo site_url('user') ?><!--" class="">-->
+                        <i class="material-icons">account_circle</i>
+                        <?php
+                        if ($this->session->userdata('logged')) {
+                            $user = $this->session->userdata('user');
+                            if ($this->session->userdata('version') == 'Student') {
+                                $username = $user[0]['fname'] . ' ' . $user[0]['lname'];
+                            } else {
+                                $username = $user[0]['name'];
+                            }
+                            echo "<p class=''>$username</p>";
+                        }
+
+
+                        ?>
+                        <!--                        </a>-->
                     </li>
-                    <li>
-                        <a href="<?php echo site_url('login') ?>" id="log_in_btn" class="btn btn-twitter">
-                            Log in
-                            <!--									<p class="hidden-lg hidden-md">Profile</p>-->
-                        </a>
-                    </li>
+                    <!--                    <li>-->
+                    <!--                        <a href="-->
+                    <?php //echo site_url('login') ?><!--" id="log_in_btn" class="btn btn-twitter">-->
+                    <!--                            Log in-->
+                    <!--                            <!--									<p class="hidden-lg hidden-md">Profile</p>-->
+                    <!--                        </a>-->
+                    <!--                    </li>-->
                 </ul>
+                <!--                --><?php //if($this->session->userdata('version') == 'Student'){echo 'pointer-events:none;';}?>
 
                 <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group is-empty dropdown">
+                    <div class="form-group is-empty dropdown" style="">
                         <input type="text" class="form-control dropdown-toggle" id="search" data-toggle="dropdown"
-                               placeholder="Search">
+                               placeholder="Search" <?php if ($this->session->userdata('version') == 'Student') {
+                            echo 'disabled';
+                        } ?>>
                         <span class="material-input"></span>
                         <div class="card-content">
                             <ul id="finalResults" class="dropdown-menu"></ul>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <button type="submit"
+                            class="btn btn-white btn-round btn-just-icon" <?php if ($this->session->userdata('version') == 'Student') {
+                        echo 'disabled';
+                    } ?>>
                         <i class="material-icons">search</i>
 
                     </button>
@@ -975,5 +994,14 @@
 
     }
 
+
+    <?php
+    if ($this->session->userdata('version') == 'Student') {
+
+        $user = $this->session->userdata('user');
+        $index = $user[0]['index'];
+        echo "studentSelect($index)";
+    }
+    ?>
 
 </script>

@@ -33,17 +33,25 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="material-icons">person</i>
-                            <p class="hidden-lg hidden-md">Profile</p>
-                        </a>
+                        <i class="material-icons">account_circle</i>
+                        <?php
+                        if ($this->session->userdata('logged')) {
+                            $user = $this->session->userdata('user');
+                            if ($this->session->userdata('version') == 'Student') {
+                                $username = $user[0]['fname'] . ' ' . $user[0]['lname'];
+                            } else {
+                                $username = $user[0]['name'];
+                            }
+                            echo "<p class=''>$username</p>";
+                        }
+                        ?>
                     </li>
-                    <li>
-                        <a href="#pablo" id="log_in_btn" class="btn btn-twitter">
-                            Log in
-                            <p class="hidden-lg hidden-md">Profile</p>
-                        </a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="#pablo" id="log_out_btn" class="btn btn-link">-->
+<!--                            Log out-->
+<!--                            <p class="hidden-lg hidden-md">Profile</p>-->
+<!--                        </a>-->
+<!--                    </li>-->
                 </ul>
 
                 <form class="navbar-form navbar-right" role="search">

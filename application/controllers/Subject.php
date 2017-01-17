@@ -8,6 +8,8 @@
  */
 class Subject extends CI_Controller
 {
+    
+    //Get the subject for all subjects
     public function subjectForClass()
     {
         $index = $this->input->post('index');

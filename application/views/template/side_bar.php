@@ -7,8 +7,10 @@
 
     <div class="logo">
         <a href="" class="simple-text">
-            SGM System
+            <h4>SGM System</h4>
+            <?php echo '<h6>' . $this->session->userdata('version') . ' Edition </h6>' ?>
         </a>
+
     </div>
 
     <div class="sidebar-wrapper">
@@ -42,6 +44,12 @@
                 <a href="<?php echo site_url('upload'); ?>">
                     <i class="material-icons">file_upload</i>
                     <p>Upload CSV</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="<?php echo site_url('login/logout'); ?>">
+                    <i class="material-icons">trending_down</i>
+                    <p>Log out</p>
                 </a>
             </li>
 

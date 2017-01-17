@@ -84,7 +84,7 @@ function drawGraphWith1stInClass(subjects, terms, marks, class1stMarks) {
             name: '1st of class',
             data: class1stMarks
         }, {
-            name: $("#studentName").text() + ' (10th of class)',
+            name: $("#studentName").text(),
             data: studentMarks
         }]
     });

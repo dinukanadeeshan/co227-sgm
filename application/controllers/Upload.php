@@ -2,32 +2,44 @@
 
 class Upload extends CI_Controller
 {
+     /**
+     * Index Page for this controller.
+     *
+     */
     public function index()
     {
 
+         // Check whether some user is logged in or not
+        if (!$this->session->userdata('logged')) {
+            echo "You are not logged....";
 
-        $this->load->view('template/header');
+            redirect('login');
+        } else {
+            $this->load->view('template/header');
 
-        $grades = $this->Class_model->getAllGrades();
-        $classes = $this->Class_model->getAllClassNames();
-        $subjects = $this->Subject_model->getAllSubjects();
+            $grades = $this->Class_model->getAllGrades();
+            $classes = $this->Class_model->getAllClassNames();
+            $subjects = $this->Subject_model->getAllSubjects();
 
 
-        $data = array(
-            'active' => 'upload',
-            'grades' => $grades,
-            'classes' => $classes,
-            'subjects' => $subjects
-        );
+            $data = array(
+                'active' => 'upload',
+                'grades' => $grades,
+                'classes' => $classes,
+                'subjects' => $subjects
+            );
 
-        $this->load->view('template/side_bar', $data);
+            $this->load->view('template/side_bar', $data);
 
-        $this->load->view('pages/upload');
+            $this->load->view('pages/upload');
 
-        $this->load->view('template/footer');
+            $this->load->view('template/footer');
+        }
     }
 
 
+    
+    // Upload CSV file to with marks for specific subject
     public function subject_marks()
     {
 
@@ -90,10 +102,9 @@ class Upload extends CI_Controller
         }
 
 
-
-
     }
 
+    // Upload CSV file to with Students for specific class
     public function student_list()
     {
         $grade = $this->input->post('grade');
@@ -146,6 +157,8 @@ class Upload extends CI_Controller
 
     }
 
+    // Upload CSV file to with class marks for all subject
+    // UNDER CONSTRUCTION
     public function class_marks()
     {
         $grade = $this->input->post('grade');
